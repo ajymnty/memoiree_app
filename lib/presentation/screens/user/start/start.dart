@@ -32,7 +32,7 @@ class Start extends GetView<StartController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ShadText(
-                    text: (controller.currentPage.value + 1).toString(),
+                    text: controller.currentPage.value.toString(),
                     fontSize: 20.sp,
                   ),
                   ShadText(text: "/", fontSize: 10.sp),
@@ -86,7 +86,7 @@ class Start extends GetView<StartController> {
                             controller.flipController.flipcard();
                           }
                           if (controller.currentPage.value <
-                              controller.flashcards.length) {
+                              controller.flashcards.length - 1) {
                             controller.currentPage++;
                           }
                         },

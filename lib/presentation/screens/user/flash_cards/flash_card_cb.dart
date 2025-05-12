@@ -58,7 +58,7 @@ class FlashCardsController extends GetxController {
     var res = await GetConnect()
         .post("${GlobalConfigs.baseUrl}flashcard/${id ?? ""}", {
           'name': name.text,
-          'category': category.value,
+          'category': "none",
           'group': group.value,
           'question': question.text,
           'answer': answer.text,

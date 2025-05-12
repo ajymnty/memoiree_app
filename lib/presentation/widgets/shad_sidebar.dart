@@ -41,11 +41,11 @@ class ShadSidebar extends StatelessWidget {
                     children: [
                       _buildNavigationButton('/flashcards', 'Flash Cards'),
 
-                      _buildNavigationButton('/flash-card-groups', 'Groups'),
-                      _buildNavigationButton(
-                        '/flash-card-categories',
-                        'Categories',
-                      ),
+                      _buildNavigationButton('/flash-card-groups', 'Decks'),
+                      // _buildNavigationButton(
+                      //   '/flash-card-categories',
+                      //   'Categories',
+                      // ),
                       //_buildNavigationButton('/quiz-mode', 'Quiz Mode'),
                       //_buildNavigationButton('/schedule', 'Schedule'),
                       _buildNavigationButton('/calendar', 'Calendar'),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -122,16 +123,6 @@ class Signin extends StatelessWidget {
           width: Get.width,
           child: ShadButton(
             onPressed: () async {
-              // show loading
-              // showDialog(
-              //   context: Get.context!,
-              //   builder:
-              //       (c) => LoadingAnimationWidget.stretchedDots(
-              //         color: Colors.white,
-              //         size: 40.sp,
-              //       ),
-              // );
-              //Get.back();
               await controller.login(context);
             },
             child: Text(

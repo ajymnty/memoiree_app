@@ -46,7 +46,7 @@ class App extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return ShadApp(
+        return ShadApp.material(
           debugShowCheckedModeBanner: false,
           title: 'Memoiree',
 

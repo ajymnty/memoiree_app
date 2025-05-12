@@ -124,7 +124,7 @@ class Signup extends StatelessWidget {
           width: Get.width,
           child: ShadButton(
             onPressed: () async {
-              await controller.signup();
+              await controller.signup(context);
             },
             child: Text(
               'Signup',

@@ -55,16 +55,18 @@ class Diary extends GetView<DiaryController> {
               trailing: Icon(Icons.search_rounded),
             ),
             SizedBox(height: 5.h),
-            SizedBox(
-              height: Get.height - 140.h,
-              width: Get.width,
-              child: ListView.builder(
-                itemCount: controller.diaries.length,
-                shrinkWrap: true,
-                itemBuilder: (_, index) {
-                  // FlashCardsModel data = controller.flashcards[index];
-                  return _item(controller.diaries[index]);
-                },
+            Obx(
+              () => SizedBox(
+                height: Get.height - 140.h,
+                width: Get.width,
+                child: ListView.builder(
+                  itemCount: controller.diaries.value.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) {
+                    // FlashCardsModel data = controller.flashcards[index];
+                    return _item(controller.diaries[index]);
+                  },
+                ),
               ),
             ),
           ],
@@ -139,7 +141,15 @@ class Diary extends GetView<DiaryController> {
                             child: Row(
                               children: [
                                 ShadButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _showSheet(
+                                      c,
+                                      title: data['title'],
+                                      description: data['description'],
+                                      id: data['id'],
+                                      date: data['date'],
+                                    );
+                                  },
                                   child: ShadText(
                                     text: 'Edit',
                                     color: Colors.white,
@@ -169,7 +179,10 @@ class Diary extends GetView<DiaryController> {
     );
   }
 
-  _showSheet(context, {id}) {
+  _showSheet(context, {title, description, id, date}) {
+    controller.title.text = title;
+    controller.description.text = description;
+
     showShadSheet(
       side: ShadSheetSide.bottom,
       context: context,
@@ -196,11 +209,25 @@ class Diary extends GetView<DiaryController> {
                         ],
                       ),
                       SizedBox(height: 5),
-                      ShadInput(placeholder: ShadText(text: 'Title')),
+                      ShadInput(
+                        placeholder: ShadText(text: 'Title'),
+                        controller: controller.title,
+                      ),
                       SizedBox(height: 5),
-                      ShadTextarea(placeholder: ShadText(text: 'Description')),
+                      ShadTextarea(
+                        placeholder: ShadText(text: 'Description'),
+                        controller: controller.description,
+                      ),
                       SizedBox(height: 5),
-                      SizedBox(width: Get.width, child: ShadDatePicker()),
+                      SizedBox(
+                        width: Get.width,
+                        child: ShadDatePicker(
+                          onChanged: (date) {
+                            if (date == null) return;
+                            controller.date.value = date;
+                          },
+                        ),
+                      ),
                       SizedBox(
                         width: Get.width,
                         child: ShadButton(

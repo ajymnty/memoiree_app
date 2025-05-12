@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:memoiree/app/configs/global.dart';
 import 'package:memoiree/app/models/user.dart';
 import 'package:memoiree/presentation/widgets/shad_alerts.dart';
+import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -72,7 +73,7 @@ class AuthController extends GetxController {
     }
   }
 
-  signup() async {
+  signup(context) async {
     var body = {
       'first_name': firstNameControllerC.text,
       'last_name': lastNameControllerC.text,
@@ -84,7 +85,33 @@ class AuthController extends GetxController {
     if (res.statusCode != 200) {
       // alert error
     } else {
-      selectedView('signin');
+      Get.dialog(
+        ShadDialog(
+          child: ShadCustomAlert(
+            icon: Icons.check,
+            title: 'Success',
+            subtitle: 'Signup success',
+            buttonText: 'Okay',
+            color: Colors.green,
+            onPressed: () {
+              selectedView('signin');
+            },
+          ),
+        ),
+      );
+    }
+  }
+
+  void someFunction() async {
+    try {
+      showDialog(
+        context: Get.context!,
+        builder: (context) => Center(child: CircularProgressIndicator()),
+      );
+      await Future.delayed(Duration(seconds: 1));
+      Get.back();
+    } catch (e) {
+      print("Error: $e");
     }
   }
 }

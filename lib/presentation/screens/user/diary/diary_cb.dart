@@ -9,7 +9,7 @@ class DiaryController extends GetxController {
   var title = TextEditingController();
   var description = TextEditingController();
   Rx<DateTime> date = DateTime.now().obs;
-  List diaries = [];
+  RxList diaries = [].obs;
   @override
   void onInit() async {
     await loadDiaries();
@@ -18,6 +18,7 @@ class DiaryController extends GetxController {
   }
 
   loadDiaries() async {
+    diaries.clear();
     var res = await GetConnect().get(
       "${GlobalConfigs.baseUrl}diary-by-creator/${GlobalConfigs.settings.user!.id}",
     );
@@ -27,13 +28,15 @@ class DiaryController extends GetxController {
 
   upsertDiary(context, {id}) async {
     var res = await GetConnect()
-        .post("${GlobalConfigs.baseUrl}diary/{$id ?? ''}", {
+        .post("${GlobalConfigs.baseUrl}diary/${id ?? ''}", {
           "title": title.text,
           "description": description.text,
           "date": date.value.toIso8601String(),
           "created_by": GlobalConfigs.settings.user!.id,
         });
-    print(res.body);
+
+    await loadDiaries();
+    Navigator.pop(context);
   }
 
   deleteDiary(id) async {

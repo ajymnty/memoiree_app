@@ -250,26 +250,26 @@ class FlashCards extends GetView<FlashCardsController> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 5),
-                      ShadDropdown(
-                        items:
-                            ['None'] +
-                            controller.categories
-                                .map<String>((e) => e['name'])
-                                .toList(),
-                        value: c,
-                        onChanged: (v) {
-                          if (v.toString().toLowerCase() == "none") {
-                            controller.category.value = 0;
-                            return;
-                          }
-                          controller.category.value =
-                              controller.categories.firstWhere(
-                                (e) => e['name'] == v,
-                              )['id'];
-                        },
-                        hintText: "Category",
-                      ),
+                      //SizedBox(height: 5),
+                      // ShadDropdown(
+                      //   items:
+                      //       ['None'] +
+                      //       controller.categories
+                      //           .map<String>((e) => e['name'])
+                      //           .toList(),
+                      //   value: c,
+                      //   onChanged: (v) {
+                      //     if (v.toString().toLowerCase() == "none") {
+                      //       controller.category.value = 0;
+                      //       return;
+                      //     }
+                      //     controller.category.value =
+                      //         controller.categories.firstWhere(
+                      //           (e) => e['name'] == v,
+                      //         )['id'];
+                      //   },
+                      //   hintText: "Category",
+                      // ),
                       ShadDropdown(
                         value: g,
                         items:
@@ -287,7 +287,7 @@ class FlashCards extends GetView<FlashCardsController> {
                                 (e) => e['name'] == v,
                               )['id'];
                         },
-                        hintText: "Flashcard group",
+                        hintText: "Flashcard Deck",
                       ),
                       ShadDropdown(
                         value: s,
