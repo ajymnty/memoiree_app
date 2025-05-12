@@ -24,6 +24,11 @@ class FlashCardGroupsController extends GetxController {
       "${GlobalConfigs.baseUrl}group-by-creator/${GlobalConfigs.settings.user!.id}",
     );
 
+    groups.value =
+        res.body['groups']
+            .map<GroupModel>((e) => GroupModel.fromJson(e))
+            .toList();
+
     shownGroups.value = List.generate(groups.length, (i) => groups[i]);
   }
 

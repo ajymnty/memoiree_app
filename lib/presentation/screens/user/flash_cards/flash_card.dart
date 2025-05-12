@@ -239,41 +239,19 @@ class FlashCards extends GetView<FlashCardsController> {
               frontWidget: Container(
                 width: Get.width,
                 constraints: BoxConstraints(maxHeight: 70.h),
-                child: Row(
-                  children: [
-                    ShadText(
-                      text: "Question: ",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      overflow: TextOverflow.fade,
-                    ),
-                    SizedBox(height: 5.h),
-                    ShadText(
-                      text: data.question,
-                      fontSize: 14.sp,
-                      overflow: TextOverflow.fade,
-                    ),
-                  ],
+                child: ShadText(
+                  text: "Question: ${data.question}",
+                  fontSize: 14.sp,
+                  overflow: TextOverflow.fade,
                 ),
               ),
               backWidget: Container(
                 width: Get.width,
                 constraints: BoxConstraints(maxHeight: 70.h),
-                child: Row(
-                  children: [
-                    ShadText(
-                      text: "Answer: ",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      overflow: TextOverflow.fade,
-                    ),
-                    SizedBox(height: 5.h),
-                    ShadText(
-                      text: data.answer,
-                      fontSize: 14.sp,
-                      overflow: TextOverflow.fade,
-                    ),
-                  ],
+                child: ShadText(
+                  text: "Answer: ${data.answer}",
+                  fontSize: 14.sp,
+                  overflow: TextOverflow.fade,
                 ),
               ),
               controller: c,
