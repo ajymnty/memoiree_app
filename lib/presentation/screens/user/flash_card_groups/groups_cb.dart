@@ -50,6 +50,19 @@ class FlashCardGroupsController extends GetxController {
     print(res.body);
     await loadGroups();
   }
+
+  getCount(id) async {
+    int length = 0;
+    var res = await GetConnect().get(
+      "${GlobalConfigs.baseUrl}flashcard-by-group/$id",
+    );
+    try {
+      length = res.body['flashcards'].length;
+    } catch (e) {
+      length = 0;
+    }
+    return length;
+  }
 }
 
 class FlashCardGroupsBinding extends Bindings {

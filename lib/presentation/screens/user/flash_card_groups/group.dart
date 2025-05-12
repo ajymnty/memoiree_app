@@ -115,7 +115,7 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                   children: [
                     SizedBox(width: 5.w),
                     ShadText(
-                      text: "Flash Card Groups",
+                      text: "Flash Card Decks",
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -189,8 +189,11 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                             ),
                           ),
                           ShadButton(
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.pop(c);
+                              if (await controller.getCount(data.id) == 0) {
+                                return;
+                              }
                               Get.toNamed(
                                 '/flash-card-start',
                                 arguments: {'id': data.id, 'type': 'group'},
@@ -245,10 +248,22 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                 Row(
                   children: [
                     ShadText(text: 'Flashcard Count: ', fontSize: 14.sp),
-                    ShadText(
-                      text: "0",
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
+                    FutureBuilder(
+                      future: controller.getCount(data.id),
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return ShadText(
+                            text: snapshot.data.toString(),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          );
+                        }
+                        return ShadText(
+                          text: "loading..",
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -334,9 +349,7 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                          description: ShadText(
-                            text: "Delete this categories?",
-                          ),
+                          description: ShadText(text: "Delete this deck?"),
                           actions: [
                             SizedBox(
                               width: Get.width,
