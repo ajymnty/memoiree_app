@@ -165,18 +165,24 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
             SizedBox(height: 5.h),
             ShadInput(
               placeholder: ShadText(text: 'Search'),
+              controller: controller.searchController,
               trailing: Icon(Icons.search_rounded),
+              onChanged: (b) {
+                controller.searchGroup();
+              },
             ),
             SizedBox(height: 5.h),
-            SizedBox(
-              height: Get.height - 200.h,
-              width: Get.width,
-              child: ListView.builder(
-                itemCount: controller.groups.length,
-                itemBuilder: (c, index) {
-                  var data = controller.groups[index];
-                  return _item(data, c);
-                },
+            Obx(
+              () => SizedBox(
+                height: Get.height - 200.h,
+                width: Get.width,
+                child: ListView.builder(
+                  itemCount: controller.shownGroups.length,
+                  itemBuilder: (c, index) {
+                    var data = controller.shownGroups[index];
+                    return _item(data, c);
+                  },
+                ),
               ),
             ),
           ],

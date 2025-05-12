@@ -15,7 +15,9 @@ class FlashCardsController extends GetxController {
   var size = "small".obs;
   var groups = [].obs;
   var categories = [].obs;
-  var flashcards = [].obs;
+  RxList<FlashCardsModel> flashcards = <FlashCardsModel>[].obs;
+  RxList<FlashCardsModel> shownFlashCards = <FlashCardsModel>[].obs;
+  var searchController = TextEditingController();
   var background = 0.obs;
   var popOverController = ShadPopoverController();
   @override
@@ -27,6 +29,23 @@ class FlashCardsController extends GetxController {
     super.onInit();
   }
 
+  searchFlashCards() {
+    shownFlashCards.clear();
+    if (searchController.text == "") {
+      shownFlashCards.assignAll(flashcards);
+      return;
+    }
+    shownFlashCards.value =
+        flashcards
+            .where(
+              (e) =>
+                  e.name.contains("test") ||
+                  e.question.contains(searchController.text) ||
+                  e.answer.contains(searchController.text),
+            )
+            .toList();
+  }
+
   loadFlashCards() async {
     var res = await GetConnect().get(
       "${GlobalConfigs.baseUrl}flashcard-by-user/${GlobalConfigs.settings.user!.id}",
@@ -36,6 +55,10 @@ class FlashCardsController extends GetxController {
       res.body['flashcards']
           .map<FlashCardsModel>((e) => FlashCardsModel.fromJson(e))
           .toList(),
+    );
+    shownFlashCards.value = List.generate(
+      flashcards.length,
+      (i) => flashcards[i],
     );
   }
 

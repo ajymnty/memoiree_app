@@ -29,47 +29,53 @@ class Diary extends GetView<DiaryController> {
 
   _loaded() {
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          children: [
-            SizedBox(height: 10.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(width: 5.w),
-                    ShadText(
-                      text: "Diary",
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ],
-                ),
-                ShadSidebar(),
-              ],
-            ),
-            ShadInput(
-              placeholder: ShadText(text: 'Search'),
-              trailing: Icon(Icons.search_rounded),
-            ),
-            SizedBox(height: 5.h),
-            Obx(
-              () => SizedBox(
-                height: Get.height - 140.h,
-                width: Get.width,
-                child: ListView.builder(
-                  itemCount: controller.diaries.value.length,
-                  shrinkWrap: true,
-                  itemBuilder: (_, index) {
-                    // FlashCardsModel data = controller.flashcards[index];
-                    return _item(controller.diaries[index]);
-                  },
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Column(
+            children: [
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 5.w),
+                      ShadText(
+                        text: "Diary",
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                  ShadSidebar(),
+                ],
+              ),
+              ShadInput(
+                placeholder: ShadText(text: 'Search'),
+                trailing: Icon(Icons.search_rounded),
+                onChanged: (v) {
+                  controller.searchDiaries();
+                },
+                controller: controller.searchController,
+              ),
+              SizedBox(height: 5.h),
+              Obx(
+                () => SizedBox(
+                  height: Get.height - 140.h,
+                  width: Get.width,
+                  child: ListView.builder(
+                    itemCount: controller.shownDiaries.length,
+                    shrinkWrap: true,
+                    itemBuilder: (_, index) {
+                      // FlashCardsModel data = controller.flashcards[index];
+                      return _item(controller.shownDiaries[index]);
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -222,6 +228,24 @@ class Diary extends GetView<DiaryController> {
                         controller: controller.description,
                       ),
                       SizedBox(height: 5),
+                      SizedBox(
+                        width: Get.width,
+                        child: ShadDatePicker(
+                          selected: DateTime.now(),
+                          onChanged: (date) {
+                            if (date == null) return;
+                            var now = DateTime.now();
+                            controller.date.value = DateTime(
+                              date.year,
+                              date.month,
+                              date.day,
+                              now.hour,
+                              now.minute,
+                              now.second,
+                            );
+                          },
+                        ),
+                      ),
 
                       SizedBox(
                         width: Get.width,

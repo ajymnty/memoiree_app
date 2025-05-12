@@ -95,19 +95,25 @@ class FlashCards extends GetView<FlashCardsController> {
             SizedBox(height: 5.h),
             ShadInput(
               placeholder: ShadText(text: 'Search'),
+              controller: controller.searchController,
+              onChanged: (v) {
+                controller.searchFlashCards();
+              },
               trailing: Icon(Icons.search_rounded),
             ),
             SizedBox(height: 5.h),
-            SizedBox(
-              height: Get.height - 200.h,
-              width: Get.width,
-              child: ListView.builder(
-                itemCount: controller.flashcards.length,
-                shrinkWrap: true,
-                itemBuilder: (_, index) {
-                  FlashCardsModel data = controller.flashcards[index];
-                  return _item(data);
-                },
+            Obx(
+              () => SizedBox(
+                height: Get.height - 200.h,
+                width: Get.width,
+                child: ListView.builder(
+                  itemCount: controller.shownFlashCards.length,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) {
+                    FlashCardsModel data = controller.shownFlashCards[index];
+                    return _item(data);
+                  },
+                ),
               ),
             ),
           ],
@@ -261,10 +267,6 @@ class FlashCards extends GetView<FlashCardsController> {
     controller.question.text = question ?? "";
     controller.answer.text = answer ?? "";
 
-    var c =
-        category != null && controller.categories.isNotEmpty
-            ? controller.categories[int.parse(category.toString())]['name']
-            : null;
     var g =
         group != null && controller.groups.isNotEmpty
             ? controller.groups[int.parse(group.toString())]['name']
@@ -332,9 +334,9 @@ class FlashCards extends GetView<FlashCardsController> {
                               items: ['Dark', 'Light'],
                               onChanged: (v) {
                                 if (v == "Dark") {
-                                  controller.background.value = 1;
+                                  controller.background.value = 0;
                                 } else {
-                                  controller.background.value == 0;
+                                  controller.background.value == 1;
                                 }
                               },
                               hintText: "Theme",
