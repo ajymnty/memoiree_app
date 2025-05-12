@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/flash_cards/flash_card_cb.dart';
 import 'package:memoiree/presentation/widgets/shad_dropdown.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -204,7 +205,10 @@ class FlashCards extends GetView<FlashCardsController> {
                                 ),
                                 ShadButton(
                                   onPressed: () async {
-                                    await controller.deleteFlashcard(data.id);
+                                    ShadLoading.show(
+                                      controller.deleteFlashcard(data.id),
+                                      c,
+                                    );
                                   },
                                   child: ShadText(
                                     text: 'Delete',
@@ -406,7 +410,10 @@ class FlashCards extends GetView<FlashCardsController> {
                         width: Get.width,
                         child: ShadButton(
                           onPressed: () async {
-                            await controller.upsertFlashcard(context, id: id);
+                            ShadLoading.show(
+                              controller.upsertFlashcard(context, id: id),
+                              context,
+                            );
                           },
                           child: ShadText(
                             text: 'Add',

@@ -20,6 +20,7 @@ class CalendarController extends GetxController {
   @override
   void onInit() async {
     await loadEvents();
+
     calendarView(CalendarView.loaded);
 
     super.onInit();
@@ -36,7 +37,7 @@ class CalendarController extends GetxController {
               .map<EventsModel>((event) => EventsModel.fromJson(event))
               .toList();
     }
-    print(res.body);
+    await changeEvents(focusedDay.value);
   }
 
   upsertEvent(context, {id}) async {
@@ -57,7 +58,7 @@ class CalendarController extends GetxController {
       body: description.text,
     );
 
-    // await loadEvents();
+    await loadEvents();
     Navigator.pop(context);
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:memoiree/presentation/screens/all/auth/auth_cb.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -103,28 +104,20 @@ class Signup extends StatelessWidget {
         _passwordBox(
           label: 'Password',
           textController: controller.passwordControllerC,
+          obscure: controller.isPasswordVisibleC,
         ),
         _passwordBox(
           label: 'Confirm Password',
           textController: controller.confirmPasswordControllerC,
+          obscure: controller.isPasswordVisibleCC,
         ),
-        Container(
-          alignment: Alignment.centerRight,
-          child: Text(
-            'Forgot Password?',
-            style: GoogleFonts.poppins(
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ),
-        ),
+
         SizedBox(height: 10.h),
         SizedBox(
           width: Get.width,
           child: ShadButton(
             onPressed: () async {
-              await controller.signup(context);
+              ShadLoading.show(controller.signup(context), context);
             },
             child: Text(
               'Signup',
@@ -168,7 +161,7 @@ class Signup extends StatelessWidget {
     );
   }
 
-  _passwordBox({String label = "", textController}) {
+  _passwordBox({String label = "", textController, RxBool? obscure}) {
     return Column(
       children: [
         Row(
@@ -187,7 +180,7 @@ class Signup extends StatelessWidget {
               fontSize: 12.sp,
               color: Colors.grey,
             ),
-            obscureText: true,
+            obscureText: obscure!.value,
             keyboardType: TextInputType.text,
             trailing: ShadIconButton(
               width: 24,
@@ -197,15 +190,9 @@ class Signup extends StatelessWidget {
                 secondaryBorder: ShadBorder.none,
                 secondaryFocusedBorder: ShadBorder.none,
               ),
-              icon: Icon(
-                controller.isPasswordVisible.value
-                    ? LucideIcons.eyeOff
-                    : LucideIcons.eye,
-              ),
+              icon: Icon(obscure.value ? LucideIcons.eyeOff : LucideIcons.eye),
               onPressed: () {
-                controller.isPasswordVisible(
-                  !controller.isPasswordVisible.value,
-                );
+                obscure(!obscure.value);
               },
             ),
           ),

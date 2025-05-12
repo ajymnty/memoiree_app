@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:memoiree/app/configs/global.dart';
 import 'package:memoiree/app/models/user.dart';
 import 'package:memoiree/presentation/widgets/shad_alerts.dart';
-import 'package:memoiree/presentation/widgets/shad_text.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,9 +14,9 @@ enum AuthView { loading, loaded, error }
 class AuthController extends GetxController {
   var authView = AuthView.loading.obs;
   var selectedView = "signin".obs;
-  var isPasswordVisible = false.obs;
-  var isPasswordVisibleC = false.obs;
-  var isPasswordVisibleCC = false.obs;
+  var isPasswordVisible = true.obs;
+  var isPasswordVisibleC = true.obs;
+  var isPasswordVisibleCC = true.obs;
   //controllers for signin form
   var usernameController = TextEditingController(text: 'niiko');
   var passwordController = TextEditingController(text: 'nikko');
@@ -48,27 +48,29 @@ class AuthController extends GetxController {
       },
       headers: {"Content-Type": "application/json"},
     );
-    Get.back();
+
     var isSuccess = res.statusCode == 200;
-    showShadDialog(
-      context: context,
-      builder:
-          (c) => ShadCustomAlert(
-            title: isSuccess ? 'Success' : 'Error',
-            icon: Icons.error,
-            subtitle: isSuccess ? 'Login successful!' : 'Invalid Credentials!',
-            buttonText: 'Ok',
-            color: isSuccess ? Colors.green : Colors.red,
-            onPressed: () {
-              Navigator.pop(c);
-            },
-          ),
-    );
+    // showShadDialog(
+    //   context: context,
+    //   builder:
+    //       (c) => ShadCustomAlert(
+    //         title: isSuccess ? 'Success' : 'Error',
+    //         icon: Icons.error,
+    //         subtitle: isSuccess ? 'Login successful!' : 'Invalid Credentials!',
+    //         buttonText: 'Ok',
+    //         color: isSuccess ? Colors.green : Colors.red,
+    //         onPressed: () {
+    //           Navigator.pop(c);
+    //         },
+    //       ),
+    // );
+    // Navigator.pop(context);
     if (isSuccess) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       var user = User.fromJson(res.body['user']);
       prefs.setString('user', jsonEncode(user.toJson()));
       GlobalConfigs.settings.user = user;
+
       Get.offAllNamed('/flashcards');
     }
   }
@@ -85,20 +87,21 @@ class AuthController extends GetxController {
     if (res.statusCode != 200) {
       // alert error
     } else {
-      Get.dialog(
-        ShadDialog(
-          child: ShadCustomAlert(
-            icon: Icons.check,
-            title: 'Success',
-            subtitle: 'Signup success',
-            buttonText: 'Okay',
-            color: Colors.green,
-            onPressed: () {
-              selectedView('signin');
-            },
-          ),
-        ),
-      );
+      selectedView('signin');
+      // Get.dialog(
+      //   ShadDialog(
+      //     child: ShadCustomAlert(
+      //       icon: Icons.check,
+      //       title: 'Success',
+      //       subtitle: 'Signup success',
+      //       buttonText: 'Okay',
+      //       color: Colors.green,
+      //       onPressed: () {
+      //         selectedView('signin');
+      //       },
+      //     ),
+      //   ),
+      // );
     }
   }
 

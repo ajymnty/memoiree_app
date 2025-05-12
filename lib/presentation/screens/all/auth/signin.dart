@@ -123,7 +123,7 @@ class Signin extends StatelessWidget {
           width: Get.width,
           child: ShadButton(
             onPressed: () async {
-              await controller.login(context);
+              ShadLoading.show(controller.login(context), context);
             },
             child: Text(
               'Login',

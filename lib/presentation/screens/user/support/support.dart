@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/support/support_cb.dart';
 import 'package:memoiree/presentation/widgets/shad_dropdown.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -67,7 +68,7 @@ class Support extends GetView<SupportController> {
               width: Get.width,
               child: ShadButton(
                 onPressed: () {
-                  controller.upsertSupport(context);
+                  ShadLoading.show(controller.upsertSupport(context), context);
                 },
                 child: ShadText(text: "Submit", color: Colors.white),
               ),

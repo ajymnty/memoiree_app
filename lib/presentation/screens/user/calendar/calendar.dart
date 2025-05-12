@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/calendar/calendar_cb.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -131,7 +132,10 @@ class Calendar extends GetView<CalendarController> {
                               width: Get.width,
                               child: ShadButton(
                                 onPressed: () async {
-                                  await controller.upsertEvent(c);
+                                  ShadLoading.show(
+                                    controller.upsertEvent(c),
+                                    context,
+                                  );
                                 },
                                 child: ShadText(
                                   text: 'Add',
@@ -195,13 +199,16 @@ class Calendar extends GetView<CalendarController> {
               ),
             ),
             SizedBox(height: 10.h),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.events.length,
+            SizedBox(
+              height: Get.height / 2.8,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: controller.events.length,
 
-              itemBuilder: (c, index) {
-                return _item(controller.events[index], c);
-              },
+                itemBuilder: (c, index) {
+                  return _item(controller.events[index], c);
+                },
+              ),
             ),
           ],
         ),
@@ -298,7 +305,10 @@ class Calendar extends GetView<CalendarController> {
                                       color: Colors.white,
                                     ),
                                     onPressed: () async {
-                                      await controller.deleteEvent(data.id);
+                                      ShadLoading.show(
+                                        controller.deleteEvent(data.id),
+                                        context,
+                                      );
                                       Navigator.pop(c);
                                     },
                                   ),

@@ -12,7 +12,10 @@ class SplashController extends GetxController {
   var splashView = SplashView.loading.obs;
   @override
   void onInit() async {
-    var status = await Permission.scheduleExactAlarm.request().isGranted;
+    var status = true;
+
+    status = await Permission.scheduleExactAlarm.request().isGranted;
+    status = await Permission.notification.request().isGranted;
 
     if (!status) exit(0);
     final SharedPreferences prefs = await SharedPreferences.getInstance();

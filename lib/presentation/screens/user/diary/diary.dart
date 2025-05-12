@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/diary/diary_cb.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -170,7 +171,10 @@ class Diary extends GetView<DiaryController> {
                                 ),
                                 ShadButton(
                                   onPressed: () async {
-                                    await controller.deleteDiary(data['id']);
+                                    ShadLoading.show(
+                                      controller.deleteDiary(data['id']),
+                                      c,
+                                    );
                                   },
                                   child: ShadText(
                                     text: 'Delete',
@@ -255,7 +259,10 @@ class Diary extends GetView<DiaryController> {
                         width: Get.width,
                         child: ShadButton(
                           onPressed: () async {
-                            controller.upsertDiary(context, id: id);
+                            ShadLoading.show(
+                              controller.upsertDiary(context, id: id),
+                              context,
+                            );
                           },
                           child: ShadText(
                             text: 'Add',

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/flash_card_groups/groups_cb.dart';
 import 'package:memoiree/presentation/screens/user/start/start_cb.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -357,9 +358,12 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                                       width: Get.width,
                                       child: ShadButton(
                                         onPressed: () async {
-                                          await controller.upsertGroup(
+                                          ShadLoading.show(
+                                            controller.upsertGroup(
+                                              context,
+                                              id: data.id,
+                                            ),
                                             context,
-                                            id: data.id,
                                           );
                                         },
                                         child: ShadText(
@@ -426,7 +430,10 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                                         color: Colors.white,
                                       ),
                                       onPressed: () async {
-                                        await controller.deleteGroup(data.id);
+                                        ShadLoading.show(
+                                          controller.deleteGroup(data.id),
+                                          c,
+                                        );
                                         Navigator.pop(c);
                                       },
                                     ),

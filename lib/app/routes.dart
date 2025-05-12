@@ -3,11 +3,8 @@ import 'package:memoiree/presentation/screens/all/auth/auth.dart';
 import 'package:memoiree/presentation/screens/all/auth/auth_cb.dart';
 import 'package:memoiree/presentation/screens/user/about/about.dart';
 import 'package:memoiree/presentation/screens/user/about/about_cb.dart';
-import 'package:memoiree/presentation/screens/user/alarms/alarms.dart';
-import 'package:memoiree/presentation/screens/user/alarms/alarms_cb.dart';
 import 'package:memoiree/presentation/screens/user/calendar/calendar.dart';
 import 'package:memoiree/presentation/screens/user/calendar/calendar_cb.dart';
-import 'package:memoiree/presentation/screens/user/categories/categories.dart';
 import 'package:memoiree/presentation/screens/user/categories/categories_cb.dart';
 import 'package:memoiree/presentation/screens/user/diary/diary.dart';
 import 'package:memoiree/presentation/screens/user/diary/diary_cb.dart';
@@ -28,7 +25,6 @@ appRoutes() => <GetPage>[
     page: () => FlashCards(),
     binding: FlashCardsBinding(),
   ),
-  GetPage(name: '/schedule', page: () => Alarms(), binding: AlarmsBinding()),
   GetPage(
     name: '/calendar',
     page: () => Calendar(),
@@ -48,11 +44,6 @@ appRoutes() => <GetPage>[
     name: '/flash-card-groups',
     page: () => FlashCardGroups(),
     binding: FlashCardGroupsBinding(),
-  ),
-  GetPage(
-    name: '/flash-card-categories',
-    page: () => FlashCardCategories(),
-    binding: FlashCardCategoriesBinding(),
   ),
   GetPage(name: '/auth', page: () => Auth(), binding: AuthBinding()),
   GetPage(name: '/support', page: () => Support(), binding: SupporBinding()),
