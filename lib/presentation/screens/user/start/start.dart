@@ -132,11 +132,19 @@ class Start extends GetView<StartController> {
               () => FlipCard(
                 frontWidget: _card(
                   "Question",
+                  controller
+                      .flashcards[controller.currentPage.value]
+                      .background,
                   controller.flashcards[controller.currentPage.value].question,
+                  controller.flashcards[controller.currentPage.value].size,
                 ),
                 backWidget: _card(
                   "Answer",
+                  controller
+                      .flashcards[controller.currentPage.value]
+                      .background,
                   controller.flashcards[controller.currentPage.value].answer,
+                  controller.flashcards[controller.currentPage.value].size,
                 ),
                 controller: controller.flipController,
                 rotateSide: RotateSide.bottom,
@@ -158,13 +166,20 @@ class Start extends GetView<StartController> {
     return Center(child: CircularProgressIndicator());
   }
 
-  _card(title, data) {
+  _card(title, background, data, size) {
     return Container(
       width: Get.width - 40.w,
-
+      height:
+          size.toString().toLowerCase() == "small"
+              ? 100.h
+              : size.toString().toLowerCase() == "medium"
+              ? 250.h
+              : size.toString().toLowerCase() == "large"
+              ? 400.h
+              : null,
       padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 15.sp),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: background.toString() == "0" ? Colors.white : Colors.black,
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: [
           BoxShadow(blurRadius: 5, color: Colors.grey.withOpacity(0.5)),
@@ -179,6 +194,7 @@ class Start extends GetView<StartController> {
               text: title,
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
+              color: background.toString() != "0" ? Colors.white : Colors.black,
             ),
           ),
           SizedBox(height: 10.h),
@@ -189,6 +205,8 @@ class Start extends GetView<StartController> {
               child: ShadText(
                 overflow: TextOverflow.fade,
                 text: data,
+                color:
+                    background.toString() != "0" ? Colors.white : Colors.black,
                 fontSize: 15.sp,
               ),
             ),

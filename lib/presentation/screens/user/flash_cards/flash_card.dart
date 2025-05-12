@@ -246,7 +246,17 @@ class FlashCards extends GetView<FlashCardsController> {
     );
   }
 
-  _showSheet(context, {category, group, size, name, question, answer, id}) {
+  _showSheet(
+    context, {
+    category,
+    group,
+    size,
+    name,
+    question,
+    answer,
+    id,
+    background,
+  }) {
     controller.name.text = name ?? "";
     controller.question.text = question ?? "";
     controller.answer.text = answer ?? "";
@@ -260,6 +270,12 @@ class FlashCards extends GetView<FlashCardsController> {
             ? controller.groups[int.parse(group.toString())]['name']
             : null;
     var s = size?.toString().capitalizeFirst;
+    var t =
+        background == 0
+            ? "Light"
+            : background == 1
+            ? "Dark"
+            : null;
 
     showShadSheet(
       side: ShadSheetSide.bottom,
@@ -306,6 +322,38 @@ class FlashCards extends GetView<FlashCardsController> {
                       //   },
                       //   hintText: "Category",
                       // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: Get.width / 2 - 25.w,
+                            child: ShadDropdown(
+                              value: t ?? "Dark",
+                              items: ['Dark', 'Light'],
+                              onChanged: (v) {
+                                if (v == "Dark") {
+                                  controller.background.value = 1;
+                                } else {
+                                  controller.background.value == 0;
+                                }
+                              },
+                              hintText: "Theme",
+                            ),
+                          ),
+                          SizedBox(
+                            width: Get.width / 2 - 25.w,
+                            child: ShadDropdown(
+                              value: s ?? "Small",
+                              items: ['Small', 'Medium', 'Large', 'Auto'],
+                              onChanged: (v) {
+                                controller.size.value =
+                                    v.toString().toLowerCase();
+                              },
+                              hintText: "Flashcard Size",
+                            ),
+                          ),
+                        ],
+                      ),
                       ShadDropdown(
                         value: g,
                         items:
@@ -325,14 +373,7 @@ class FlashCards extends GetView<FlashCardsController> {
                         },
                         hintText: "Flashcard Deck",
                       ),
-                      ShadDropdown(
-                        value: s,
-                        items: ['Small', 'Medium', 'Large', 'Auto'],
-                        onChanged: (v) {
-                          controller.size.value = v.toString().toLowerCase();
-                        },
-                        hintText: "Flashcard Size",
-                      ),
+
                       ShadInput(
                         placeholder: ShadText(text: 'Name'),
                         controller: controller.name,

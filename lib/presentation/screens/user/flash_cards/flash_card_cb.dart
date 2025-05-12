@@ -16,6 +16,7 @@ class FlashCardsController extends GetxController {
   var groups = [].obs;
   var categories = [].obs;
   var flashcards = [].obs;
+  var background = 0.obs;
   var popOverController = ShadPopoverController();
   @override
   void onInit() async {
@@ -63,7 +64,7 @@ class FlashCardsController extends GetxController {
           'question': question.text,
           'answer': answer.text,
           'size': size.value,
-          'background': 0,
+          'background': background.value,
           'owner': GlobalConfigs.settings.user!.id,
         });
 

@@ -106,7 +106,10 @@ class Diary extends GetView<DiaryController> {
                       //fontWeight: FontWeight.w500,
                     ),
 
-                    ShadText(text: data['description']),
+                    ShadText(
+                      text: data['description'],
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     ShadText(
                       text: data['date'],
                       fontSize: 11.sp,
@@ -219,15 +222,7 @@ class Diary extends GetView<DiaryController> {
                         controller: controller.description,
                       ),
                       SizedBox(height: 5),
-                      SizedBox(
-                        width: Get.width,
-                        child: ShadDatePicker(
-                          onChanged: (date) {
-                            if (date == null) return;
-                            controller.date.value = date;
-                          },
-                        ),
-                      ),
+
                       SizedBox(
                         width: Get.width,
                         child: ShadButton(
