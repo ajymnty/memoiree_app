@@ -91,6 +91,7 @@ class Diary extends GetView<DiaryController> {
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.5.h),
       margin: EdgeInsets.only(bottom: 7.5.h),
       decoration: BoxDecoration(
+        border: Border(left: BorderSide(width: 5.w, color: Colors.teal)),
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),
       ),
@@ -112,9 +113,12 @@ class Diary extends GetView<DiaryController> {
                       //fontWeight: FontWeight.w500,
                     ),
 
-                    ShadText(
-                      text: data['description'],
-                      overflow: TextOverflow.ellipsis,
+                    SizedBox(
+                      width: Get.width - 110.w,
+                      child: ShadText(
+                        text: data['description'],
+                        overflow: TextOverflow.fade,
+                      ),
                     ),
                     ShadText(
                       text: data['date'],

@@ -39,7 +39,7 @@ class FlashCardsController extends GetxController {
         flashcards
             .where(
               (e) =>
-                  e.name.contains("test") ||
+                  e.name.contains(searchController.text) ||
                   e.question.contains(searchController.text) ||
                   e.answer.contains(searchController.text),
             )

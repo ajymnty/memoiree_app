@@ -69,54 +69,56 @@ class FlashCards extends GetView<FlashCardsController> {
 
   _loaded() {
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
 
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 10.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(width: 5.w),
-                    ShadText(
-                      text: "Flash Cards",
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ],
-                ),
-                ShadSidebar(),
-              ],
-            ),
-            SizedBox(height: 5.h),
-            ShadInput(
-              placeholder: ShadText(text: 'Search'),
-              controller: controller.searchController,
-              onChanged: (v) {
-                controller.searchFlashCards();
-              },
-              trailing: Icon(Icons.search_rounded),
-            ),
-            SizedBox(height: 5.h),
-            Obx(
-              () => SizedBox(
-                height: Get.height - 200.h,
-                width: Get.width,
-                child: ListView.builder(
-                  itemCount: controller.shownFlashCards.length,
-                  shrinkWrap: true,
-                  itemBuilder: (_, index) {
-                    FlashCardsModel data = controller.shownFlashCards[index];
-                    return _item(data);
-                  },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 5.w),
+                      ShadText(
+                        text: "Flash Cards",
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                  ShadSidebar(),
+                ],
+              ),
+              SizedBox(height: 5.h),
+              ShadInput(
+                placeholder: ShadText(text: 'Search'),
+                controller: controller.searchController,
+                onChanged: (v) {
+                  controller.searchFlashCards();
+                },
+                trailing: Icon(Icons.search_rounded),
+              ),
+              SizedBox(height: 10.h),
+              Obx(
+                () => SizedBox(
+                  height: Get.height - 200.h,
+                  width: Get.width,
+                  child: ListView.builder(
+                    itemCount: controller.shownFlashCards.length,
+                    shrinkWrap: true,
+                    itemBuilder: (_, index) {
+                      FlashCardsModel data = controller.shownFlashCards[index];
+                      return _item(data);
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -126,17 +128,28 @@ class FlashCards extends GetView<FlashCardsController> {
     var c = FlipCardController();
     var popOverController = ShadPopoverController();
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.5.h),
+      //padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 7.5.h),
       margin: EdgeInsets.only(bottom: 7.5.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(blurRadius: 3, color: Colors.grey.withOpacity(0.4)),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
+              ),
+              color: Colors.green,
+            ),
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -214,31 +227,54 @@ class FlashCards extends GetView<FlashCardsController> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.r),
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 0),
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 5,
-                ),
-              ],
+              // boxShadow: [
+              //   BoxShadow(
+              //     offset: Offset(0, 0),
+              //     color: Colors.grey.withOpacity(0.5),
+              //     blurRadius: 5,
+              //   ),
+              // ],
             ),
             child: FlipCard(
               frontWidget: Container(
                 width: Get.width,
                 constraints: BoxConstraints(maxHeight: 70.h),
-                child: ShadText(
-                  text: data.question,
-                  fontSize: 14.sp,
-                  overflow: TextOverflow.fade,
+                child: Wrap(
+                  runAlignment: WrapAlignment.center,
+                  children: [
+                    ShadText(
+                      text: "Question: ",
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      overflow: TextOverflow.fade,
+                    ),
+                    SizedBox(height: 5.h),
+                    ShadText(
+                      text: data.question,
+                      fontSize: 14.sp,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ],
                 ),
               ),
               backWidget: Container(
                 width: Get.width,
                 constraints: BoxConstraints(maxHeight: 70.h),
-                child: ShadText(
-                  text: data.answer,
-                  fontSize: 14.sp,
-                  overflow: TextOverflow.fade,
+                child: Wrap(
+                  children: [
+                    ShadText(
+                      text: "Answer: ",
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      overflow: TextOverflow.fade,
+                    ),
+                    SizedBox(height: 5.h),
+                    ShadText(
+                      text: data.answer,
+                      fontSize: 14.sp,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ],
                 ),
               ),
               controller: c,
