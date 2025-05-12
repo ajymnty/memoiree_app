@@ -17,6 +17,7 @@ class ShadText extends Text {
   final String? text;
   final int? maxFontSize;
   final int? minFontSize;
+  // ignore: annotate_overrides, overridden_fields
   final TextOverflow? overflow;
 
   const ShadText({

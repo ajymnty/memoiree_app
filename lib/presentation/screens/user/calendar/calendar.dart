@@ -124,7 +124,6 @@ class Calendar extends GetView<CalendarController> {
                                     time.minute,
                                     time.second,
                                   );
-                                  print(controller.datetime.value);
                                 },
                               ),
                             ),

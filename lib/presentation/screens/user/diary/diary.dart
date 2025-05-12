@@ -176,11 +176,11 @@ class Diary extends GetView<DiaryController> {
                                       c,
                                     );
                                   },
+                                  backgroundColor: Colors.red,
                                   child: ShadText(
                                     text: 'Delete',
                                     color: Colors.white,
                                   ),
-                                  backgroundColor: Colors.red,
                                 ),
                               ],
                             ),

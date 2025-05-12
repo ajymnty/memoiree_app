@@ -33,12 +33,10 @@ class FlashCardGroupsController extends GetxController {
   }
 
   upsertGroup(context, {id}) async {
-    var res = await GetConnect().post(
-      "${GlobalConfigs.baseUrl}group/${id ?? ""}",
-      {'name': name.text, 'created_by': GlobalConfigs.settings.user!.id},
-    );
-
-    print(res.body);
+    await GetConnect().post("${GlobalConfigs.baseUrl}group/${id ?? ""}", {
+      'name': name.text,
+      'created_by': GlobalConfigs.settings.user!.id,
+    });
 
     await loadGroups();
 
@@ -46,13 +44,12 @@ class FlashCardGroupsController extends GetxController {
   }
 
   deleteGroup(id) async {
-    var res = await GetConnect().get(
+    await GetConnect().get(
       "${GlobalConfigs.baseUrl}delete-group/$id",
 
       headers: {"Content-Type": "application/json"},
     );
 
-    print(res.body);
     await loadGroups();
   }
 

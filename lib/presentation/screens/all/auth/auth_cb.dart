@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/app/configs/global.dart';
 import 'package:memoiree/app/models/user.dart';
-import 'package:memoiree/presentation/widgets/shad_alerts.dart';
-import 'package:memoiree/presentation/widgets/shad_loading.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum AuthView { loading, loaded, error }
@@ -102,19 +99,6 @@ class AuthController extends GetxController {
       //     ),
       //   ),
       // );
-    }
-  }
-
-  void someFunction() async {
-    try {
-      showDialog(
-        context: Get.context!,
-        builder: (context) => Center(child: CircularProgressIndicator()),
-      );
-      await Future.delayed(Duration(seconds: 1));
-      Get.back();
-    } catch (e) {
-      print("Error: $e");
     }
   }
 }

@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:memoiree/presentation/screens/all/auth/auth_cb.dart';
 import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';

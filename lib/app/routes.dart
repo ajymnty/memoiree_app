@@ -5,7 +5,6 @@ import 'package:memoiree/presentation/screens/user/about/about.dart';
 import 'package:memoiree/presentation/screens/user/about/about_cb.dart';
 import 'package:memoiree/presentation/screens/user/calendar/calendar.dart';
 import 'package:memoiree/presentation/screens/user/calendar/calendar_cb.dart';
-import 'package:memoiree/presentation/screens/user/categories/categories_cb.dart';
 import 'package:memoiree/presentation/screens/user/diary/diary.dart';
 import 'package:memoiree/presentation/screens/user/diary/diary_cb.dart';
 import 'package:memoiree/presentation/screens/user/flash_card_groups/group.dart';

@@ -69,7 +69,7 @@ class CalendarController extends GetxController {
   }
 
   deleteEvent(id) async {
-    var res = GetConnect().get("${GlobalConfigs.baseUrl}delete-event/$id");
+    GetConnect().get("${GlobalConfigs.baseUrl}delete-event/$id");
     await loadEvents();
     changeEvents(selectedDay);
   }

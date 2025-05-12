@@ -224,7 +224,6 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                             onPressed: () {
                               Navigator.pop(c);
                             },
-                            child: ShadText(text: 'No'),
                             backgroundColor: Colors.white,
                             decoration: ShadDecoration(
                               border: ShadBorder.all(
@@ -232,6 +231,7 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                                 width: 1,
                               ),
                             ),
+                            child: ShadText(text: 'No'),
                           ),
                           ShadButton(
                             onPressed: () async {

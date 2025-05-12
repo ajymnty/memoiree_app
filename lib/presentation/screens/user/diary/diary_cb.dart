@@ -47,22 +47,12 @@ class DiaryController extends GetxController {
   }
 
   upsertDiary(context, {id}) async {
-    var res = await GetConnect()
-        .post("${GlobalConfigs.baseUrl}diary/${id ?? ''}", {
-          "title": title.text,
-          "description": description.text,
-          "date": date.value.toIso8601String(),
-          "created_by": GlobalConfigs.settings.user!.id,
-        });
-
     await loadDiaries();
     Navigator.pop(context);
   }
 
   deleteDiary(id) async {
-    var res = await GetConnect().get(
-      "${GlobalConfigs.baseUrl}delete-diary/$id",
-    );
+    await GetConnect().get("${GlobalConfigs.baseUrl}delete-diary/$id");
 
     await loadDiaries();
   }

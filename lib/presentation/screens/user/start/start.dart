@@ -3,6 +3,7 @@ import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/start/start_cb.dart';
+import 'package:memoiree/presentation/widgets/shad_alerts.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -32,7 +33,7 @@ class Start extends GetView<StartController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ShadText(
-                    text: controller.currentPage.value.toString(),
+                    text: (controller.currentPage.value + 1).toString(),
                     fontSize: 20.sp,
                   ),
                   ShadText(text: "/", fontSize: 10.sp),
@@ -70,7 +71,6 @@ class Start extends GetView<StartController> {
                         onPressed: () {
                           controller.currentPage--;
                         },
-                        child: ShadText(text: 'Previous'),
                         backgroundColor: Colors.white,
                         decoration: ShadDecoration(
                           color: Colors.white,
@@ -79,6 +79,7 @@ class Start extends GetView<StartController> {
                             color: Colors.black12,
                           ),
                         ),
+                        child: ShadText(text: 'Previous'),
                       ),
                       ShadButton(
                         onPressed: () {
@@ -88,6 +89,18 @@ class Start extends GetView<StartController> {
                           if (controller.currentPage.value <
                               controller.flashcards.length - 1) {
                             controller.currentPage++;
+                          } else {
+                            ShadCustomAlert(
+                              title: "Error!",
+                              icon: Icons.close,
+                              subtitle:
+                                  "You reach the last flashcard of your deck!",
+                              buttonText: 'Okay',
+                              color: Colors.red,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            );
                           }
                         },
                         child: ShadText(text: 'Next', color: Colors.white),

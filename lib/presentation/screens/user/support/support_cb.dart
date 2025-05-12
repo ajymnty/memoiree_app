@@ -17,14 +17,13 @@ class SupportController extends GetxController {
   }
 
   upsertSupport(context, {id}) async {
-    var res = await GetConnect().post("${GlobalConfigs.baseUrl}support", {
+    await GetConnect().post("${GlobalConfigs.baseUrl}support", {
       "title": title.text,
       "description": description.text,
       "category": type.value,
       "created_by": GlobalConfigs.settings.user!.id,
       "status": "pending",
     });
-    print(res.body);
   }
 }
 

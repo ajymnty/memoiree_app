@@ -79,19 +79,16 @@ class FlashCardsController extends GetxController {
   }
 
   upsertFlashcard(context, {id}) async {
-    var res = await GetConnect()
-        .post("${GlobalConfigs.baseUrl}flashcard/${id ?? ""}", {
-          'name': name.text,
-          'category': "none",
-          'group': group.value,
-          'question': question.text,
-          'answer': answer.text,
-          'size': size.value,
-          'background': background.value,
-          'owner': GlobalConfigs.settings.user!.id,
-        });
-
-    print(res.body);
+    await GetConnect().post("${GlobalConfigs.baseUrl}flashcard/${id ?? ""}", {
+      'name': name.text,
+      'category': "none",
+      'group': group.value,
+      'question': question.text,
+      'answer': answer.text,
+      'size': size.value,
+      'background': background.value,
+      'owner': GlobalConfigs.settings.user!.id,
+    });
 
     await loadFlashCards();
 
@@ -99,13 +96,12 @@ class FlashCardsController extends GetxController {
   }
 
   deleteFlashcard(id) async {
-    var res = await GetConnect().get(
+    await GetConnect().get(
       "${GlobalConfigs.baseUrl}delete-flashcard/$id",
 
       headers: {"Content-Type": "application/json"},
     );
 
-    print(res.body);
     await loadFlashCards();
   }
 }

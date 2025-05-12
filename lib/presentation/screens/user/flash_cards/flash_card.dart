@@ -1,7 +1,6 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_flip_card/flipcard/flip_card.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -210,11 +209,11 @@ class FlashCards extends GetView<FlashCardsController> {
                                       c,
                                     );
                                   },
+                                  backgroundColor: Colors.red,
                                   child: ShadText(
                                     text: 'Delete',
                                     color: Colors.white,
                                   ),
-                                  backgroundColor: Colors.red,
                                 ),
                               ],
                             ),
