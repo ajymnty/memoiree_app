@@ -304,11 +304,11 @@ class Calendar extends GetView<CalendarController> {
                                       color: Colors.white,
                                     ),
                                     onPressed: () async {
+                                      Navigator.pop(c);
                                       ShadLoading.show(
                                         controller.deleteEvent(data.id),
                                         context,
                                       );
-                                      Navigator.pop(c);
                                     },
                                   ),
                                 ),
