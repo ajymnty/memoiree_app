@@ -180,8 +180,8 @@ class Diary extends GetView<DiaryController> {
   }
 
   _showSheet(context, {title, description, id, date}) {
-    controller.title.text = title;
-    controller.description.text = description;
+    controller.title.text = title ?? "";
+    controller.description.text = description ?? "";
 
     showShadSheet(
       side: ShadSheetSide.bottom,

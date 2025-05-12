@@ -1,3 +1,5 @@
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,41 @@ class Calendar extends GetView<CalendarController> {
           CalendarView.error => _error(),
         },
       ),
+      bottomNavigationBar: FlashyTabBar(
+        selectedIndex: 2,
+        showElevation: true,
+        onItemSelected: (index) {
+          switch (index) {
+            case 0:
+              Get.toNamed('/flashcards');
+            case 1:
+              Get.toNamed('/flash-card-groups');
+            case 2:
+              Get.toNamed('/calendar');
+            default:
+              Get.toNamed('/about');
+          }
+        },
+        items: [
+          FlashyTabBarItem(
+            icon: Icon(Icons.add_circle),
+            title: Text('Flashcards'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(CupertinoIcons.square_stack_3d_up),
+            title: Text('Decks'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(CupertinoIcons.calendar),
+            title: Text('Calendar'),
+          ),
+          FlashyTabBarItem(
+            icon: Icon(CupertinoIcons.info),
+            title: Text('About'),
+          ),
+        ],
+      ),
+
       floatingActionButton: ShadIconButton(
         icon: Icon(Icons.add),
         onPressed: () {
