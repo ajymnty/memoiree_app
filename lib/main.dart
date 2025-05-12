@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:memoiree/app/notification_service.dart';
 import 'package:memoiree/app/routes.dart';
 import 'package:memoiree/presentation/screens/all/splash/splash.dart';
 import 'package:memoiree/presentation/screens/all/splash/splash_cb.dart';

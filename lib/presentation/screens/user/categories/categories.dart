@@ -135,7 +135,7 @@ class FlashCardCategories extends GetView<FlashCardCategoriesController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ShadText(
-                    text: " Start Review?",
+                    text: " Start Learning?",
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                   ),

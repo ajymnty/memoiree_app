@@ -32,7 +32,7 @@ class Start extends GetView<StartController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ShadText(
-                    text: controller.currentPage.value.toString(),
+                    text: (controller.currentPage.value + 1).toString(),
                     fontSize: 20.sp,
                   ),
                   ShadText(text: "/", fontSize: 10.sp),
@@ -86,7 +86,7 @@ class Start extends GetView<StartController> {
                             controller.flipController.flipcard();
                           }
                           if (controller.currentPage.value <
-                              controller.flashcards.length - 1) {
+                              controller.flashcards.length) {
                             controller.currentPage++;
                           }
                         },
@@ -117,7 +117,8 @@ class Start extends GetView<StartController> {
                   children: [
                     SizedBox(width: 5.w),
                     ShadText(
-                      text: "Review Mode - ${controller.args['type']}",
+                      text:
+                          "Learning Mode - ${controller.args['type'] == "group" ? "Deck" : "Category"}",
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                     ),

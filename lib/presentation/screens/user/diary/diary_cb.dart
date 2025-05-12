@@ -1,0 +1,53 @@
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:memoiree/app/configs/global.dart';
+
+enum DiaryView { loading, loaded }
+
+class DiaryController extends GetxController {
+  var diaryView = DiaryView.loading.obs;
+  var title = TextEditingController();
+  var description = TextEditingController();
+  Rx<DateTime> date = DateTime.now().obs;
+  List diaries = [];
+  @override
+  void onInit() async {
+    await loadDiaries();
+    diaryView(DiaryView.loaded);
+    super.onInit();
+  }
+
+  loadDiaries() async {
+    var res = await GetConnect().get(
+      "${GlobalConfigs.baseUrl}diary-by-creator/${GlobalConfigs.settings.user!.id}",
+    );
+    diaries.assignAll(res.body['diaries']);
+    print(res.body);
+  }
+
+  upsertDiary(context, {id}) async {
+    var res = await GetConnect()
+        .post("${GlobalConfigs.baseUrl}diary/{$id ?? ''}", {
+          "title": title.text,
+          "description": description.text,
+          "date": date.value.toIso8601String(),
+          "created_by": GlobalConfigs.settings.user!.id,
+        });
+    print(res.body);
+  }
+
+  deleteDiary(id) async {
+    var res = await GetConnect().get(
+      "${GlobalConfigs.baseUrl}delete-diary/$id",
+    );
+
+    await loadDiaries();
+  }
+}
+
+class DiaryBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => DiaryController());
+  }
+}

@@ -160,7 +160,7 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ShadText(
-                    text: " Start Review?",
+                    text: " Start Learning?",
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                   ),

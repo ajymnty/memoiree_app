@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:memoiree/presentation/screens/all/auth/auth_cb.dart';
+import 'package:memoiree/presentation/widgets/shad_loading.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class Signin extends StatelessWidget {
@@ -121,6 +123,15 @@ class Signin extends StatelessWidget {
           child: ShadButton(
             onPressed: () async {
               // show loading
+              // showDialog(
+              //   context: Get.context!,
+              //   builder:
+              //       (c) => LoadingAnimationWidget.stretchedDots(
+              //         color: Colors.white,
+              //         size: 40.sp,
+              //       ),
+              // );
+              //Get.back();
               await controller.login(context);
             },
             child: Text(

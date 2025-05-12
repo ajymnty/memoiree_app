@@ -14,14 +14,14 @@ class Support extends GetView<SupportController> {
     return Scaffold(
       body: Obx(
         () => switch (controller.supportView.value) {
-          SupportView.loaded => _loaded(),
+          SupportView.loaded => _loaded(context),
           SupportView.loading => _loading(),
         },
       ),
     );
   }
 
-  _loaded() {
+  _loaded(context) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -44,16 +44,33 @@ class Support extends GetView<SupportController> {
                 ShadSidebar(),
               ],
             ),
-            ShadInput(placeholder: ShadText(text: "Title")),
+            ShadInput(
+              placeholder: ShadText(text: "Title"),
+              controller: controller.title,
+            ),
             ShadDropdown(
               items: ['Bug', 'Review', 'Suggestion'],
-              onChanged: (v) {},
+              onChanged: (v) {
+                controller.type(v);
+              },
               hintText: "Type",
             ),
             SizedBox(
-              height: 350.h,
               width: Get.width,
-              child: ShadTextarea(placeholder: ShadText(text: "Description")),
+              child: ShadTextarea(
+                placeholder: ShadText(text: "Description"),
+                controller: controller.description,
+              ),
+            ),
+            SizedBox(height: 10.h),
+            SizedBox(
+              width: Get.width,
+              child: ShadButton(
+                onPressed: () {
+                  controller.upsertSupport(context);
+                },
+                child: ShadText(text: "Submit", color: Colors.white),
+              ),
             ),
           ],
         ),

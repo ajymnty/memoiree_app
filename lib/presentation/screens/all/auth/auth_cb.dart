@@ -47,7 +47,7 @@ class AuthController extends GetxController {
       },
       headers: {"Content-Type": "application/json"},
     );
-
+    Get.back();
     var isSuccess = res.statusCode == 200;
     showShadDialog(
       context: context,
@@ -68,7 +68,7 @@ class AuthController extends GetxController {
       var user = User.fromJson(res.body['user']);
       prefs.setString('user', jsonEncode(user.toJson()));
       GlobalConfigs.settings.user = user;
-      Get.offAndToNamed('/flashcards');
+      Get.offAllNamed('/flashcards');
     }
   }
 

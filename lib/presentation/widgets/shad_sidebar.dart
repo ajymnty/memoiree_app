@@ -49,6 +49,7 @@ class ShadSidebar extends StatelessWidget {
                       //_buildNavigationButton('/quiz-mode', 'Quiz Mode'),
                       //_buildNavigationButton('/schedule', 'Schedule'),
                       _buildNavigationButton('/calendar', 'Calendar'),
+                      _buildNavigationButton('/diary', 'Diary'),
                       _buildNavigationButton('/support', 'Support'),
                       _buildNavigationButton('/about', 'About'),
                       SizedBox(

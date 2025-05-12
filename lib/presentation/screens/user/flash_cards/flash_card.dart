@@ -216,11 +216,11 @@ class FlashCards extends GetView<FlashCardsController> {
     controller.answer.text = answer ?? "";
 
     var c =
-        category != null
+        category != null && controller.categories.isNotEmpty
             ? controller.categories[int.parse(category.toString())]['name']
             : null;
     var g =
-        group != null
+        group != null && controller.groups.isNotEmpty
             ? controller.groups[int.parse(group.toString())]['name']
             : null;
     var s = size?.toString().capitalizeFirst;
