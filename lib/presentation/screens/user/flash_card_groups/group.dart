@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:memoiree/presentation/screens/user/flash_card_groups/groups_cb.dart';
+import 'package:memoiree/presentation/screens/user/start/start_cb.dart';
 import 'package:memoiree/presentation/widgets/shad_sidebar.dart';
 import 'package:memoiree/presentation/widgets/shad_text.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -237,6 +238,7 @@ class FlashCardGroups extends GetView<FlashCardGroupsController> {
                               if (await controller.getCount(data.id) == 0) {
                                 return;
                               }
+                              Get.delete<StartController>();
                               Get.toNamed(
                                 '/flash-card-start',
                                 arguments: {'id': data.id, 'type': 'group'},
