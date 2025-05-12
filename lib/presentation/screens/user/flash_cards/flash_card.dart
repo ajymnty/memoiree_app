@@ -239,8 +239,7 @@ class FlashCards extends GetView<FlashCardsController> {
               frontWidget: Container(
                 width: Get.width,
                 constraints: BoxConstraints(maxHeight: 70.h),
-                child: Wrap(
-                  runAlignment: WrapAlignment.center,
+                child: Row(
                   children: [
                     ShadText(
                       text: "Question: ",
@@ -260,7 +259,7 @@ class FlashCards extends GetView<FlashCardsController> {
               backWidget: Container(
                 width: Get.width,
                 constraints: BoxConstraints(maxHeight: 70.h),
-                child: Wrap(
+                child: Row(
                   children: [
                     ShadText(
                       text: "Answer: ",
