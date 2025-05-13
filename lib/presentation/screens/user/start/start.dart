@@ -69,7 +69,29 @@ class Start extends GetView<StartController> {
                     children: [
                       ShadButton(
                         onPressed: () {
-                          controller.currentPage--;
+                          if (controller.currentPage.value == 0) {
+                            showShadDialog(
+                              context: context,
+                              builder:
+                                  (c) => Scaffold(
+                                    backgroundColor: Colors.transparent,
+
+                                    body: ShadCustomAlert(
+                                      title: "Error!",
+                                      icon: Icons.close,
+                                      subtitle:
+                                          "You are on the first flashcard of your deck!",
+                                      buttonText: 'Okay',
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        Navigator.pop(c);
+                                      },
+                                    ),
+                                  ),
+                            );
+                          } else {
+                            controller.currentPage--;
+                          }
                         },
                         backgroundColor: Colors.white,
                         decoration: ShadDecoration(
@@ -90,16 +112,24 @@ class Start extends GetView<StartController> {
                               controller.flashcards.length - 1) {
                             controller.currentPage++;
                           } else {
-                            ShadCustomAlert(
-                              title: "Error!",
-                              icon: Icons.close,
-                              subtitle:
-                                  "You reach the last flashcard of your deck!",
-                              buttonText: 'Okay',
-                              color: Colors.red,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
+                            showShadDialog(
+                              context: context,
+                              builder:
+                                  (c) => Scaffold(
+                                    backgroundColor: Colors.transparent,
+
+                                    body: ShadCustomAlert(
+                                      title: "Error!",
+                                      icon: Icons.close,
+                                      subtitle:
+                                          "You reach the last flashcard of your deck!",
+                                      buttonText: 'Okay',
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        Navigator.pop(c);
+                                      },
+                                    ),
+                                  ),
                             );
                           }
                         },

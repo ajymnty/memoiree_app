@@ -34,6 +34,7 @@ class FlashCards extends GetView<FlashCardsController> {
         selectedIndex: 0,
         showElevation: true,
         onItemSelected: (index) {
+          Get.deleteAll();
           switch (index) {
             case 0:
               Get.toNamed('/flash-cards');
@@ -282,11 +283,13 @@ class FlashCards extends GetView<FlashCardsController> {
     controller.name.text = name ?? "";
     controller.question.text = question ?? "";
     controller.answer.text = answer ?? "";
-
-    var g =
-        group != null && controller.groups.isNotEmpty
-            ? controller.groups[int.parse(group.toString())]['name']
-            : null;
+    String? g;
+    try {
+      g =
+          group != null && controller.groups.isNotEmpty
+              ? controller.groups.firstWhere((e) => e['id'] == group)['name']
+              : null;
+    } catch (e) {}
     var s = size?.toString().capitalizeFirst;
     var t =
         background == 0

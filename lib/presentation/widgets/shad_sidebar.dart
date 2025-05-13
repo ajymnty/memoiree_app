@@ -14,6 +14,7 @@ class ShadSidebar extends StatelessWidget {
       child: ShadButton.outline(
         onPressed: () {
           if (isCurrentRoute) return;
+          Get.deleteAll();
           Get.offAndToNamed(route);
         },
         backgroundColor: isCurrentRoute ? Colors.black : Colors.white,
