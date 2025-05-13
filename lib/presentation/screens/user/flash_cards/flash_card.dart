@@ -283,19 +283,20 @@ class FlashCards extends GetView<FlashCardsController> {
     controller.name.text = name ?? "";
     controller.question.text = question ?? "";
     controller.answer.text = answer ?? "";
+    controller.background.value = background ?? 0;
+
     String? g;
-    try {
-      g =
-          group != null && controller.groups.isNotEmpty
-              ? controller.groups.firstWhere((e) => e['id'] == group)['name']
-              : null;
-    } catch (e) {}
+    g =
+        group != null && controller.groups.isNotEmpty
+            ? controller.groups.firstWhere((e) => e['id'] == group)['name']
+            : null;
+    controller.group.value = group ?? 0;
     var s = size?.toString().capitalizeFirst;
     var t =
         background == 0
-            ? "Light"
-            : background == 1
             ? "Dark"
+            : background == 1
+            ? "Light"
             : null;
 
     showShadSheet(

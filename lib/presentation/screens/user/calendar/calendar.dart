@@ -191,6 +191,17 @@ class Calendar extends GetView<CalendarController> {
 
                   onChanged: (date) {
                     if (date == null) return;
+                    var now = DateTime.now();
+                    controller.datetime(
+                      DateTime(
+                        date.year,
+                        date.month,
+                        date.day,
+                        now.hour,
+                        now.minute,
+                        now.second,
+                      ),
+                    );
                     controller.focusedDay(date);
                     controller.changeEvents(date);
                   },
@@ -199,7 +210,7 @@ class Calendar extends GetView<CalendarController> {
             ),
             SizedBox(height: 10.h),
             SizedBox(
-              height: Get.height / 2.8,
+              height: Get.height / 2.85,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.events.length,
