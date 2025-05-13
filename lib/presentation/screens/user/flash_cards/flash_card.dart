@@ -356,7 +356,7 @@ class FlashCards extends GetView<FlashCardsController> {
                                 if (v == "Dark") {
                                   controller.background.value = 0;
                                 } else {
-                                  controller.background.value == 1;
+                                  controller.background.value = 1;
                                 }
                               },
                               hintText: "Theme",
